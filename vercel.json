@@ -1,4 +1,3 @@
-
 {
     "version": 2,
     "builds": [
@@ -12,5 +11,9 @@
             "src": "/(.*)",
             "dest": "app.py"
         }
-    ]
+    ],
+    "env": {
+        "PYTHONPATH": ".",
+        "PYTESSERACT_PATH": "/usr/bin/tesseract"
+    }
 }
