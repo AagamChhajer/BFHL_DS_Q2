@@ -74,7 +74,7 @@ Use Postman or any API client:
 - **Body** (raw JSON):
   ```json
   {
-      "image_path": "C:/Users/HP/Downloads/bajaj_ds/bajaj_q2/your_image.jpg"
+      "image_path": "your_image.jpg"
   }
   ```
 
@@ -96,7 +96,34 @@ Use Postman or any API client:
 ```
 
 ## Example Output
-See example response in: `bajaj_q2/output/image.png`
+
+### Sample Image
+![Sample Lab Report Output](./output/image.png)
+
+### Sample JSON Response
+```json
+{
+  "is_success": true,
+  "data": [
+    {
+      "test_name": "BLOOD UREA",
+      "test_value": "24.6",
+      "bio_reference_range": "16-50",
+      "test_unit": "mg/dl",
+      "lab_test_out_of_range": false
+    },
+    {
+      "test_name": "SERUM SODIUM",
+      "test_value": "140.3",
+      "bio_reference_range": "135-150",
+      "test_unit": "mEq/L",
+      "lab_test_out_of_range": false
+    }
+  ]
+}
+```
+
+Note: Make sure the `output` directory exists and contains your sample image file named `image.png`.
 
 ## Troubleshooting
 
@@ -117,10 +144,38 @@ See example response in: `bajaj_q2/output/image.png`
 
 ```
 bajaj_q2/
-├── app.py                 # Main FastAPI application
-├── extraction_enhancer.py # Test extraction logic
-├── lab_detector.py        # Image processing
-├── requirements.txt       # Project dependencies
-├── output/               # Example outputs
-└── venv/                 # Virtual environment
+├── api/
+│   ├── __init__.py
+│   └── routes.py
+├── app.py
+├── extraction_enhancer.py
+├── lab_detector.py
+├── requirements.txt
+├── vercel.json
+└── README.md               
 ```
+
+## Deployment to Vercel
+
+1. Install Vercel CLI:
+```bash
+npm i -g vercel
+```
+
+2. Login to Vercel:
+```bash
+vercel login
+```
+
+3. Deploy:
+```bash
+vercel
+```
+
+Follow the prompts and select:
+- Set up and deploy: Yes
+- Which scope: Your account
+- Link to existing project: No
+- Project name: lab-report-extractor
+- Directory: ./
+- Override settings: No
