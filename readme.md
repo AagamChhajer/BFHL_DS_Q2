@@ -1,13 +1,86 @@
-cd \bajaj_q2
+# Lab Report Test Extractor API
+
+A FastAPI-based API that extracts lab test results from medical reports using computer vision and OCR techniques.
+
+## Prerequisites
+
+- Python 3.8 or higher
+- Tesseract OCR
+- Virtual Environment (venv)
+
+## Installation
+
+### 1. Install Tesseract OCR
+
+#### Windows
+1. Download Tesseract installer from [GitHub](https://github.com/UB-Mannheim/tesseract/wiki)
+2. Run the installer
+3. Add Tesseract to PATH:
+   ```
+   C:\Program Files\Tesseract-OCR
+   ```
+
+### 2. Set up Python Environment
+
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+.\venv\Scripts\activate
+
+# Install requirements
+pip install -r requirements.txt
+```
+
+### 3. Requirements File
+Create `requirements.txt` with these dependencies:
+
+```txt
+fastapi==0.68.1
+uvicorn==0.15.0
+python-multipart==0.0.5
+numpy==1.21.2
+opencv-python==4.5.3.56
+pytesseract==0.3.8
+pydantic==1.8.2
+```
+
+## Running the API
+
+1. Activate virtual environment (if not already activated):
+```bash
+.\venv\Scripts\activate
+```
+
+2. Start the FastAPI server:
+```bash
+cd bajaj_q2
 uvicorn app:app --reload --port 8000
+```
 
-then Content-Type: application/json
+## Using the API
 
-body raw -> {
-    "image_path": "C:/Users/HP/Downloads/bajaj_ds/bajaj_q2/your_image.jpg"
-}
+### Make POST Request
 
-expected response 
+Use Postman or any API client:
+
+- **URL**: `http://localhost:8000/get-lab-tests`
+- **Method**: POST
+- **Headers**: 
+  ```
+  Content-Type: application/json
+  ```
+- **Body** (raw JSON):
+  ```json
+  {
+      "image_path": "C:/Users/HP/Downloads/bajaj_ds/bajaj_q2/your_image.jpg"
+  }
+  ```
+
+### Expected Response
+
+```json
 {
   "is_success": true,
   "data": [
@@ -17,9 +90,37 @@ expected response
       "bio_reference_range": "16-50",
       "test_unit": "mg/dl",
       "lab_test_out_of_range": false
-    },
-    // ... more tests ...
+    }
   ]
 }
+```
 
-result postman image at \bajaj_q2\output\image.png
+## Example Output
+See example response in: `bajaj_q2/output/image.png`
+
+## Troubleshooting
+
+1. If you get Tesseract not found error:
+   - Verify Tesseract is installed
+   - Check PATH environment variable
+   - Set explicit path in code:
+     ```python
+     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+     ```
+
+2. If image path error:
+   - Use forward slashes (/) in path
+   - Provide absolute path
+   - Verify image exists
+
+## Project Structure
+
+```
+bajaj_q2/
+├── app.py                 # Main FastAPI application
+├── extraction_enhancer.py # Test extraction logic
+├── lab_detector.py        # Image processing
+├── requirements.txt       # Project dependencies
+├── output/               # Example outputs
+└── venv/                 # Virtual environment
+```
