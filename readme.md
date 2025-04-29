@@ -1,7 +1,7 @@
 # Lab Report Test Extractor API
 
 A FastAPI-based API that extracts lab test results from medical reports using computer vision and OCR techniques.
-
+Deployed Api URL Endpoint - https://bajaj-q2-i5bv54wdp-aagams-projects-a9a54a9f.vercel.app/api/get-lab-tests
 ## Prerequisites
 
 - Python 3.8 or higher
